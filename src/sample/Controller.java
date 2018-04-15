@@ -1,9 +1,8 @@
 package sample;
 
+import javafx.beans.property.ReadOnlyStringWrapper;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.embed.swing.SwingFXUtils;
@@ -21,7 +20,6 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.layout.Pane;
-import javafx.scene.layout.VBox;
 import javafx.stage.DirectoryChooser;
 import javafx.stage.FileChooser;
 import utils.PrewittHV;
@@ -36,6 +34,9 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.net.URI;
 import java.time.LocalDate;
+import java.util.List;
+import java.util.ArrayList;
+import java.util.Arrays;
 
 public class Controller {
 
@@ -53,7 +54,7 @@ public class Controller {
     @FXML
     DatePicker dateHolder;
     @FXML
-    TableView table;
+    TableView<Details> table;
     @FXML
     TableColumn width;
     @FXML
@@ -160,70 +161,42 @@ public class Controller {
     }
 
     public void getImageDetails() {
-//       this.table = new TableView<Details>();
-//        final ObservableList<Details> data
-//                = FXCollections.observableArrayList(
-//                new Details("Jacob", "Smith", "jacob.smith@example.com"));
-//
-//        this.table.setItems(data);
-//        this.table.setEditable(true);
-//        TableColumn<Details, String> latime = new TableColumn<>("Latime");
-//        latime.setCellValueFactory(
-//                new PropertyValueFactory<>("latime"));
-//        TableColumn<Details, String> inaltime = new TableColumn<>("Inaltime");
-//        inaltime.setCellValueFactory(
-//                new PropertyValueFactory<>("inaltime"));
-//        TableColumn<Details, String> rgb = new TableColumn<>("RGB");
-//        rgb.setCellValueFactory(
-//                new PropertyValueFactory<>("rgb"));
-//        this.table.getColumns().addAll(latime, inaltime, rgb);
-//        return;
+
+        Details details1 = new Details("10", "10", "10");
+        ObservableList<Details> details = FXCollections.observableArrayList();
+        details.add(details1);
+
+        this.width.setCellValueFactory(new PropertyValueFactory<Details,String>("latime"));
+        this.height.setCellValueFactory(new PropertyValueFactory<Details,String>("inaltime"));
+        this.rgb.setCellValueFactory(new PropertyValueFactory<Details,String>("rgb"));
+        this.table.setItems(details);
+        return;
     }
 
     public static class Details {
-
-        private final StringProperty latime;
-        private final StringProperty inaltime;
-        private final StringProperty rgb;
-
         public Details(String latime, String inaltime, String rgb) {
-            this.latime = new SimpleStringProperty(this, "latime", latime);
-            this.inaltime = new SimpleStringProperty(this, "inaltime", inaltime);
-            this.rgb = new SimpleStringProperty(this, "rgb", rgb);
+            this.latime = new SimpleStringProperty(latime);
+            this.inaltime = new SimpleStringProperty(inaltime);
+            this.rgb = new SimpleStringProperty(rgb);
         }
 
-        public String getLatime() {
-            return latime.get();
-        }
-
-        public void setLatime(String value) {
-            latime.set(value);
-        }
-
+        private StringProperty latime;
+        public void setLatime(String value) { latimeProperty().set(value); }
+        public String getLatime() { return latimeProperty().get(); }
         public StringProperty latimeProperty() {
             return latime;
         }
 
-        public String getInaltime() {
-            return inaltime.get();
-        }
-
-        public void setInaltime(String value) {
-            inaltime.set(value);
-        }
-
+        private StringProperty inaltime;
+        public void setInaltime(String value) { inaltimeProperty().set(value); }
+        public String getInaltime() { return inaltimeProperty().get(); }
         public StringProperty inaltimeProperty() {
             return inaltime;
         }
 
-        public String getRgb() {
-            return rgb.get();
-        }
-
-        public void setRgb(String value) {
-            rgb.set(value);
-        }
-
+        private StringProperty rgb;
+        public void setRgb(String value) { rgbProperty().set(value); }
+        public String getRgb() { return rgbProperty().get(); }
         public StringProperty rgbProperty() {
             return rgb;
         }
