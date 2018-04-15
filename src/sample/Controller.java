@@ -218,7 +218,7 @@ public class Controller {
     public void processImage() {
         String orientation = getOrientation();
         if(orientation.equals("vertical")){
-           // PrewittVertical process = new PrewittVertical(this.img, this.imgOrg.getImage());
+           // PrewittVertical process = new PrewittVertical(this.img, this.imgOrg.getImage(), this.progressInd);
         } else if (orientation.equals("horizontal")){
           //  PrewittHorizontal process = new PrewittHorizontal(this.img, this.imgOrg.getImage());
         } else if (orientation.equals("hor&vert")){
