@@ -29,6 +29,7 @@ import utils.PrewittVertical;
 import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -217,12 +218,21 @@ public class Controller {
 
     public void processImage() {
         String orientation = getOrientation();
+        this.progressInd.setProgress(Double.valueOf(0));
+        this.progressInd.setVisible(true);
+
         if(orientation.equals("vertical")){
-           // PrewittVertical process = new PrewittVertical(this.img, this.imgOrg.getImage(), this.progressInd);
+            Image resultImage = PrewittVertical.PrewittVertical(this.imgOrg.getImage(), this.progressInd);
+            this.img.setImage(resultImage);
+            this.progressInd.setProgress(Double.valueOf(100));
         } else if (orientation.equals("horizontal")){
-          //  PrewittHorizontal process = new PrewittHorizontal(this.img, this.imgOrg.getImage());
+            Image resultImage = PrewittHorizontal.PrewittHorizontal(this.imgOrg.getImage(), this.progressInd);
+            this.img.setImage(resultImage);
+            this.progressInd.setProgress(Double.valueOf(100));
         } else if (orientation.equals("hor&vert")){
-          //  PrewittHV process = new PrewittHV(this.img, this.imgOrg.getImage());
+            Image resultImage = PrewittHV.PrewittHV(this.imgOrg.getImage(), this.progressInd);
+            this.img.setImage(resultImage);
+            this.progressInd.setProgress(Double.valueOf(100));
         }
         return;
     }
@@ -231,12 +241,12 @@ public class Controller {
         if(this.toggle.selectedProperty().getValue()) {
             this.imgOrgLabel.setVisible(false);
             this.imgOrg.setVisible(false);
-            //  this.img.setVisible(true);
+            this.img.setVisible(true);
             this.imgLabel.setVisible(true);
         } else {
             this.imgOrgLabel.setVisible(true);
             this.imgOrg.setVisible(true);
-            //  this.img.setVisible(false);
+            this.img.setVisible(false);
             this.imgLabel.setVisible(false);
         }
     }

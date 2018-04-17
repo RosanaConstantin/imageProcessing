@@ -18,7 +18,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<Pane id="window" fx:id="parentPane" prefHeight="723.0" prefWidth="1171.0" xmlns="http://javafx.com/javafx/8.0.112" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller">
+<Pane id="window" fx:id="parentPane" prefHeight="723.0" prefWidth="1171.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller">
    <children>
       <Button id="loadButton" layoutX="66.0" layoutY="94.0" mnemonicParsing="false" onAction="#loadImage" prefHeight="27.0" prefWidth="172.0" text="Incarca imaginea" />
       <Button id="processButton" fx:id="processButton" layoutX="251.0" layoutY="94.0" mnemonicParsing="false" onAction="#processImage" prefHeight="31.0" prefWidth="207.0" text="Aplica operatorul Prewitt" />
@@ -33,7 +33,7 @@
             <TableColumn fx:id="rgb" prefWidth="75.0" text="RGB" />
          </columns>
       </TableView>
-      <ProgressIndicator id="progressInd" layoutX="763.0" layoutY="532.0" prefHeight="59.0" prefWidth="61.0" progress="0.0" />
+      <ProgressIndicator id="progressInd" fx:id="progressInd" layoutX="763.0" layoutY="532.0" prefHeight="59.0" prefWidth="61.0" progress="0.0" visible="false" />
       <ImageView id="imgOrg" fx:id="imgOrg" fitHeight="433.0" fitWidth="505.0" layoutX="40.0" layoutY="173.0" mouseTransparent="true" pickOnBounds="true" preserveRatio="true" />
       <MenuBar id="menuBar" fx:id="menuBar" layoutX="121.0" layoutY="22.0" prefHeight="32.0" prefWidth="242.0">
         <menus>
@@ -51,7 +51,7 @@
                </items></Menu>
         </menus>
       </MenuBar>
-      <ImageView id="img" fitHeight="433.0" fitWidth="505.0" layoutX="32.0" layoutY="166.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView id="img" fx:id="img" fitHeight="433.0" fitWidth="505.0" layoutX="32.0" layoutY="166.0" pickOnBounds="true" preserveRatio="true" visible="false" />
       <Pane id="homePane" fx:id="homePane" layoutX="50.0" layoutY="64.0" prefHeight="619.0" prefWidth="1087.0" visible="false">
          <children>
             <TextArea id="homeText" fx:id="homeText" layoutX="3.0" layoutY="4.0" prefHeight="605.0" prefWidth="996.0" text="home&#10;frgr" />
