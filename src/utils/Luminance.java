@@ -11,21 +11,6 @@ public class Luminance {
         int b = color.getBlue();
         return 0.299*r + 0.587*g + 0.114*b;
     }
-    
-    public static double getPixel(int p) {
-    	int a = (p>>24) & 0xff;
-    	int r = (p>>16) & 0xff;
-        int g = (p>>8) & 0xff;
-        int b = p & 0xff;
-        return (a<<24) | (r<<16) | (g<<8) | b;
-    }
-
-    // return a gray version of this Color
-    public static Color toGray(Color color) {
-        int y = (int) (Math.round(lum(color)));   // round to nearest int
-        Color gray = new Color(y, y, y);
-        return gray;
-    }
 
     // are the two colors compatible?
     public static boolean compatible(Color a, Color b) {

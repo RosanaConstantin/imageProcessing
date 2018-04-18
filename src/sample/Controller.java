@@ -1,6 +1,5 @@
 package sample;
 
-import javafx.beans.property.ReadOnlyStringWrapper;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.collections.FXCollections;
@@ -10,7 +9,6 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextArea;
@@ -29,15 +27,13 @@ import utils.PrewittVertical;
 import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
-import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.net.URI;
 import java.time.LocalDate;
-import java.util.List;
-import java.util.ArrayList;
-import java.util.Arrays;
+
+import static java.lang.Math.round;
 
 public class Controller {
 
@@ -49,8 +45,6 @@ public class Controller {
     @FXML
     Pane helpPane;
     @FXML
-    Button loadButton;
-    @FXML
     Button processButton;
     @FXML
     DatePicker dateHolder;
@@ -61,7 +55,15 @@ public class Controller {
     @FXML
     TableColumn height;
     @FXML
-    TableColumn rgb;
+    TableColumn size;
+    @FXML
+    TableView<Details> tableModif;
+    @FXML
+    TableColumn widthModif;
+    @FXML
+    TableColumn heightModif;
+    @FXML
+    TableColumn sizeModif;
     @FXML
     ProgressIndicator progressInd;
     @FXML
@@ -69,12 +71,7 @@ public class Controller {
     @FXML
     MenuBar menuBar;
     @FXML
-    Menu acasaMenu;
-    @FXML
-    Menu procesareMenu;
-    @FXML
-    Menu ajutorMenu;
-
+    RadioButton radioInfo;
     @FXML
     MenuItem helpItem;
     @FXML
@@ -98,12 +95,11 @@ public class Controller {
     @FXML
     Hyperlink gitLink;
     @FXML
-    Label textGit;
-    @FXML
     ChoiceBox chooseBox;
 
-    private String path;
+    private String originalPath;
     private String imageName;
+    private String path;
 
     public void initialize(){
         this.dateHolder.setValue(LocalDate.now());
@@ -140,17 +136,18 @@ public class Controller {
     }
 
     public void loadImage() {
-
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Selecteaza imaginea");
         fileChooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("BMP files", "*.bmp"));
         File selectedImage = fileChooser.showOpenDialog(parentPane.getScene().getWindow());
-        this.path = selectedImage.getPath();
+        this.originalPath = selectedImage.getPath();
         this.imageName = selectedImage.getName();
         try {
-            this.imgOrg.setImage(new Image(new FileInputStream(this.path)));
+            this.imgOrg.setImage(new Image( new FileInputStream(this.originalPath)));
             this.chooseBox.getItems().addAll("Vertical", "Horizontal", "Hor&Vert");
-            getImageDetails();
+            this.progressInd.setVisible(true);
+            this.progressInd.setProgress(Double.valueOf(0));
+            getImageDetails(this.imgOrg.getImage(), this.originalPath, true);
         } catch (Exception ex) {
             ex.printStackTrace();
         }
@@ -161,24 +158,35 @@ public class Controller {
         return output;
     }
 
-    public void getImageDetails() {
+    public void getImageDetails(Image image, String path, boolean original) {
+        String width = String.valueOf(image.getWidth());
+        String height = String.valueOf(image.getHeight());
+        double size = new Double(new File(path).length()) / 1024 / 1024;
+        String dimensiune = String.valueOf(size);
 
-        Details details1 = new Details("10", "10", "10");
+        Details details1 = new Details(width, height, dimensiune);
         ObservableList<Details> details = FXCollections.observableArrayList();
         details.add(details1);
 
-        this.width.setCellValueFactory(new PropertyValueFactory<Details,String>("latime"));
-        this.height.setCellValueFactory(new PropertyValueFactory<Details,String>("inaltime"));
-        this.rgb.setCellValueFactory(new PropertyValueFactory<Details,String>("rgb"));
-        this.table.setItems(details);
+        if(original) {
+            this.width.setCellValueFactory(new PropertyValueFactory<Details, String>("latime"));
+            this.height.setCellValueFactory(new PropertyValueFactory<Details, String>("inaltime"));
+            this.size.setCellValueFactory(new PropertyValueFactory<Details, String>("dimensiune"));
+            this.table.setItems(details);
+        } else {
+            this.widthModif.setCellValueFactory(new PropertyValueFactory<Details, String>("latime"));
+            this.heightModif.setCellValueFactory(new PropertyValueFactory<Details, String>("inaltime"));
+            this.sizeModif.setCellValueFactory(new PropertyValueFactory<Details, String>("dimensiune"));
+            this.tableModif.setItems(details);
+        }
         return;
     }
 
     public static class Details {
-        public Details(String latime, String inaltime, String rgb) {
+        public Details(String latime, String inaltime, String dimensiune) {
             this.latime = new SimpleStringProperty(latime);
             this.inaltime = new SimpleStringProperty(inaltime);
-            this.rgb = new SimpleStringProperty(rgb);
+            this.dimensiune = new SimpleStringProperty(dimensiune);
         }
 
         private StringProperty latime;
@@ -195,11 +203,11 @@ public class Controller {
             return inaltime;
         }
 
-        private StringProperty rgb;
-        public void setRgb(String value) { rgbProperty().set(value); }
-        public String getRgb() { return rgbProperty().get(); }
-        public StringProperty rgbProperty() {
-            return rgb;
+        private StringProperty dimensiune;
+        public void setdimensiune(String value) { dimensiuneProperty().set(value); }
+        public String getdimensiune() { return dimensiuneProperty().get(); }
+        public StringProperty dimensiuneProperty() {
+            return dimensiune;
         }
     }
 
@@ -207,10 +215,12 @@ public class Controller {
         DirectoryChooser directoryChooser = new DirectoryChooser();
         directoryChooser.setTitle("Alegeti directorul");
         File selectedDirectory = directoryChooser.showDialog(parentPane.getScene().getWindow());
-        File outputFile = new File(selectedDirectory.getPath() + "/processedImages/" + this.imageName);
+        this.path = selectedDirectory.getPath() + "/" + this.imageName.substring(0, this.imageName.length() - 4) + ".bmp";
+        File outputFile = new File(this.path);
         BufferedImage bImage = SwingFXUtils.fromFXImage(this.img.getImage(), null);
         try {
-            ImageIO.write(bImage, "bmp", outputFile);
+            ImageIO.write(bImage, "png", outputFile);
+            getImageDetails(this.img.getImage(), this.path, false);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -218,8 +228,6 @@ public class Controller {
 
     public void processImage() {
         String orientation = getOrientation();
-        this.progressInd.setProgress(Double.valueOf(0));
-        this.progressInd.setVisible(true);
 
         if(orientation.equals("vertical")){
             Image resultImage = PrewittVertical.PrewittVertical(this.imgOrg.getImage(), this.progressInd);
@@ -230,10 +238,11 @@ public class Controller {
             this.img.setImage(resultImage);
             this.progressInd.setProgress(Double.valueOf(100));
         } else if (orientation.equals("hor&vert")){
-            Image resultImage = PrewittHV.PrewittHV(this.imgOrg.getImage(), this.progressInd);
+            Image resultImage = PrewittHV.PrewittHV( this.imgOrg.getImage(), this.progressInd);
             this.img.setImage(resultImage);
             this.progressInd.setProgress(Double.valueOf(100));
         }
+        saveToFile();
         return;
     }
 
@@ -243,11 +252,44 @@ public class Controller {
             this.imgOrg.setVisible(false);
             this.img.setVisible(true);
             this.imgLabel.setVisible(true);
+
+            if(this.radioInfo.isSelected()){
+                this.tableModif.setVisible(true);
+                this.table.setVisible(false);
+            } else {
+                this.tableModif.setVisible(false);
+                this.table.setVisible(false);
+            }
         } else {
             this.imgOrgLabel.setVisible(true);
             this.imgOrg.setVisible(true);
             this.img.setVisible(false);
             this.imgLabel.setVisible(false);
+
+            if(this.radioInfo.isSelected()){
+                this.tableModif.setVisible(false);
+                this.table.setVisible(true);
+            } else {
+                this.tableModif.setVisible(false);
+                this.table.setVisible(false);
+            }
         }
+    }
+
+    public void showInfo() {
+        boolean  value = this.radioInfo.isSelected();
+        if(value){
+            this.info.setVisible(true);
+            if(this.toggle.selectedProperty().getValue()) {
+                this.tableModif.setVisible(true);
+            } else {
+                this.table.setVisible(true);
+            }
+        } else {
+            this.info.setVisible(false);
+            this.table.setVisible(false);
+            this.tableModif.setVisible(false);
+        }
+        return;
     }
 }

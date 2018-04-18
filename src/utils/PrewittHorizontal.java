@@ -38,7 +38,7 @@ public class PrewittHorizontal {
             for (int x = 1; x < width - 1; x++) {
 
                 int[][] gray = matrix.pixels(x, y, image);
-
+                progressIndicator.setProgress(Double.valueOf(60));
                 // apply filter
                 int gray1 = pixel.getGray1(filter, gray);
                 int gray2 = pixel.getGray2(filter, gray);

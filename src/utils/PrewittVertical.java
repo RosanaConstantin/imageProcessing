@@ -36,6 +36,7 @@ public class PrewittVertical {
 
         for (int y = 1; y < height - 1; y++) {
             for (int x = 1; x < width - 1; x++) {
+                progressIndicator.setProgress(Double.valueOf(60));
 
                 int[][] gray = matrix.pixels(x, y, image);
 

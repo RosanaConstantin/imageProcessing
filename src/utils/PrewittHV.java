@@ -45,6 +45,7 @@ public class PrewittHV {
             for (int x = 1; x < width - 1; x++) {
 
                 int[][] gray = matrix.pixels(x, y, image);
+                progressIndicator.setProgress(Double.valueOf(60));
 
                 // apply filter
                 int gray1 = pixel.getGray1(filter1, gray);
