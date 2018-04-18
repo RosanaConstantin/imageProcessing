@@ -19,7 +19,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<Pane id="window" fx:id="parentPane" prefHeight="740.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller">
+<Pane id="window" fx:id="parentPane" prefHeight="740.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/8.0.112" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller">
    <children>
       <Button id="loadButton" layoutX="233.0" layoutY="99.0" mnemonicParsing="false" onAction="#loadImage" prefHeight="27.0" prefWidth="172.0" text="Incarca imaginea" />
       <Button id="processButton" fx:id="processButton" layoutX="794.0" layoutY="160.0" mnemonicParsing="false" onAction="#processImage" prefHeight="31.0" prefWidth="188.0" text="Aplica operatorul Prewitt" />
@@ -35,7 +35,7 @@
          </columns>
       </TableView>
       <ProgressIndicator id="progressInd" fx:id="progressInd" layoutX="849.0" layoutY="286.0" prefHeight="55.0" prefWidth="66.0" progress="0.0" visible="false" />
-      <ImageView id="imgOrg" fx:id="imgOrg" fitHeight="440.0" fitWidth="580.0" layoutX="50.0" layoutY="160.0" mouseTransparent="true" pickOnBounds="true" preserveRatio="true" />
+      <ImageView id="imgOrg" fx:id="imgOrg" fitHeight="440.0" fitWidth="580.0" layoutX="100.0" layoutY="160.0" mouseTransparent="true" pickOnBounds="true" preserveRatio="true" />
       <MenuBar id="menuBar" fx:id="menuBar" layoutX="192.0" layoutY="21.0" prefHeight="32.0" prefWidth="242.0">
         <menus>
           <Menu fx:id="homeMenu" mnemonicParsing="false" text="Acasa">
@@ -52,10 +52,10 @@
                </items></Menu>
         </menus>
       </MenuBar>
-      <ImageView id="img" fx:id="img" fitHeight="440.0" fitWidth="580.0" layoutX="50.0" layoutY="160.0" pickOnBounds="true" preserveRatio="true" visible="false" />
+      <ImageView id="img" fx:id="img" fitHeight="440.0" fitWidth="580.0" layoutX="100.0" layoutY="160.0" pickOnBounds="true" preserveRatio="true" visible="false" />
       <Pane id="helpPane" fx:id="helpPane" layoutX="50.0" layoutY="70.0" prefHeight="600.0" prefWidth="1100.0" visible="false">
          <children>
-            <TextArea id="helpText" fx:id="helpText" layoutX="29.0" layoutY="20.0" prefHeight="581.0" prefWidth="1009.0" text="The Prewitt operator is used in image processing, particularly within edge detection algorithms. Technically, it is a discrete differentiation operator, computing an approximation of the gradient of&#10; the image intensity function. At each point in the image, the result of the Prewitt operator is either the corresponding gradient vector or the norm of this vector. The Prewitt operator is based on convolving&#10; the image with a small, separable, and integer valued filter in horizontal and vertical directions and is therefore relatively inexpensive in terms of computations like Sobel and Kayyali operators. &#10;On the other hand, the gradient approximation which it produces is relatively crude, in particular for high frequency variations in the image. The Prewitt operator was developed by Judith M. S. Prewitt.&#10;&#10;In simple terms, the operator calculates the gradient of the image intensity at each point, giving the direction of the largest possible increase from light to dark and the rate of change in that direction. &#10;The result therefore shows how &quot;abruptly&quot; or &quot;smoothly&quot; the image changes at that point, and therefore how likely it is that part of the image represents an edge, as well as how that edge is likely &#10;to be oriented. In practice, the magnitude (likelihood of an edge) calculation is more reliable and easier to interpret than the direction calculation.&#10;Mathematically, the gradient of a two-variable function (here the image intensity function) is at each image point a 2D vector with the components given by the derivatives in the horizontal and vertical &#10;directions. At each image point, the gradient vector points in the direction of largest possible intensity increase, and the length of the gradient vector corresponds to the rate of change in that direction. This&#10; implies that the result of the Prewitt operator at an image point which is in a region of constant image intensity is a zero vector and at a point on an edge is a vector which points across the edge, from darker &#10;to brighter values.&#10;">
+            <TextArea id="helpText" fx:id="helpText" layoutX="29.0" layoutY="20.0" prefHeight="581.0" prefWidth="1009.0" text="Aceasta aceasta aplicatie ">
                <font>
                   <Font name="Arial Italic" size="16.0" />
                </font></TextArea>
@@ -65,19 +65,10 @@
       <Label id="imgLabel" fx:id="imgLabel" layoutX="78.0" layoutY="637.0" text="Imaginea transformata" visible="false" />
       <TextField id="info" fx:id="info" layoutX="808.0" layoutY="467.0" prefHeight="27.0" prefWidth="172.0" text="Informatii imagine" visible="false" />
       <Hyperlink id="gitLink" fx:id="gitLink" layoutX="540.0" layoutY="680.0" onMouseClicked="#openWebpage" prefHeight="25.0" prefWidth="363.0" text="https://github.com/RosanaConstantin/imageProcessing" />
-      <Label id="textGit" layoutX="319.0" layoutY="684.0" text="Gaseste proiectul pe Git, la adresa:" />
+      <Label id="textGit" layoutX="291.0" layoutY="684.0" text="Gaseste proiectul pe Git, la adresa:" />
       <ChoiceBox fx:id="chooseBox" layoutX="896.0" layoutY="99.0" onKeyPressed="#getOrientation" prefHeight="27.0" prefWidth="172.0" />
       <Label layoutX="677.0" layoutY="101.0" prefHeight="27.0" prefWidth="188.0" text="Alege tipul de transformare:" />
       <RadioButton fx:id="radioInfo" layoutX="737.0" layoutY="395.0" mnemonicParsing="false" onAction="#showInfo" prefHeight="17.0" prefWidth="291.0" text="      Afiseaza informatiile despre imagine" />
-      <Pane id="helpPane" fx:id="homePane" layoutX="60.0" layoutY="80.0" prefHeight="600.0" prefWidth="1100.0" visible="false">
-         <children>
-            <TextArea id="helpText" fx:id="helpText1" layoutX="29.0" layoutY="20.0" prefHeight="581.0" prefWidth="1009.0" text="acasa">
-               <font>
-                  <Font name="Arial Italic" size="16.0" />
-               </font>
-            </TextArea>
-         </children>
-      </Pane>
       <TableView id="table" fx:id="tableModif" fixedCellSize="30.0" layoutX="677.0" layoutY="515.0" prefHeight="151.0" prefWidth="430.0" visible="false">
          <columnResizePolicy>
             <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
@@ -88,5 +79,14 @@
             <TableColumn fx:id="sizeModif" prefWidth="75.0" text="Dimensiune" />
          </columns>
       </TableView>
+      <Pane id="helpPane" fx:id="homePane" layoutX="60.0" layoutY="80.0" prefHeight="600.0" prefWidth="1100.0" visible="false">
+         <children>
+            <TextArea id="helpText" fx:id="helpText1" layoutX="29.0" layoutY="20.0" prefHeight="581.0" prefWidth="1009.0" text="The Prewitt operator is used in image processing, particularly within edge detection algorithms. Technically, it is a discrete differentiation operator, computing an approximation of the gradient of the image intensity function. At each point in the image, the result of the Prewitt operator is either the corresponding gradient vector or the norm of this vector. The Prewitt operator is based on convolving the image with a small, separable, and integer valued filter in horizontal and vertical directions and is therefore relatively inexpensive in terms of computations like Sobel and Kayyali operators. On the other hand, the gradient approximation which it produces is relatively crude, in particular for high frequency variations in the image. The Prewitt operator was developed by Judith M. S. Prewitt.In simple terms, the operator calculates the gradient of the image intensity at each point, giving the direction of the largest possible increase from light to dark and the rate of change in that direction. The result therefore shows how &quot;abruptly&quot; or &quot;smoothly&quot; the image changes at that point, and therefore how likely it is that part of the image represents an edge, as well as how that edge is likely to be oriented. In practice, the magnitude (likelihood of an edge) calculation is more reliable and easier to interpret than the direction calculation.Mathematically, the gradient of a two-variable function (here the image intensity function) is at each image point a 2D vector with the components given by the derivatives in the horizontal and vertical directions. At each image point, the gradient vector points in the direction of largest possible intensity increase, and the length of the gradient vector corresponds to the rate of change in that direction. This implies that the result of the Prewitt operator at an image point which is in a region of constant image intensity is a zero vector and at a point on an edge is a vector which points across the edge, from darker to brighter values.">
+               <font>
+                  <Font name="Arial Italic" size="16.0" />
+               </font>
+            </TextArea>
+         </children>
+      </Pane>
    </children>
 </Pane>

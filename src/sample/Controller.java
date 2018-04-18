@@ -31,6 +31,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.net.URI;
+import java.text.DecimalFormat;
 import java.time.LocalDate;
 
 import static java.lang.Math.round;
@@ -103,6 +104,8 @@ public class Controller {
 
     public void initialize(){
         this.dateHolder.setValue(LocalDate.now());
+        this.homePane.toFront();
+        this.parentPane.toBack();
     }
 
     public void  homeInitialize(){
@@ -162,7 +165,8 @@ public class Controller {
         String width = String.valueOf(image.getWidth());
         String height = String.valueOf(image.getHeight());
         double size = new Double(new File(path).length()) / 1024 / 1024;
-        String dimensiune = String.valueOf(size);
+        DecimalFormat df = new DecimalFormat("0.00");
+        String dimensiune = String.valueOf(df.format(size));
 
         Details details1 = new Details(width, height, dimensiune);
         ObservableList<Details> details = FXCollections.observableArrayList();
