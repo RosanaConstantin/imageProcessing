@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Rectangle2D?>
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Hyperlink?>
 <?import javafx.scene.control.Label?>
@@ -15,12 +16,14 @@
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.ToggleButton?>
+<?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
 <Pane id="window" fx:id="parentPane" prefHeight="740.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/8.0.112" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller">
    <children>
+      <ComboBox fx:id="chooseBox" layoutX="921.0" layoutY="99.0" prefWidth="150.0" visibleRowCount="3" />
       <Button id="loadButton" layoutX="233.0" layoutY="99.0" mnemonicParsing="false" onAction="#loadImage" prefHeight="27.0" prefWidth="172.0" text="Incarca imaginea" />
       <Button id="processButton" fx:id="processButton" layoutX="794.0" layoutY="160.0" mnemonicParsing="false" onAction="#processImage" prefHeight="31.0" prefWidth="188.0" text="Aplica operatorul Prewitt" />
       <DatePicker id="dateHolder" fx:id="dateHolder" layoutX="715.0" layoutY="23.0" onAction="#initialize" prefHeight="27.0" prefWidth="260.0" />
@@ -35,7 +38,10 @@
          </columns>
       </TableView>
       <ProgressIndicator id="progressInd" fx:id="progressInd" layoutX="849.0" layoutY="286.0" prefHeight="55.0" prefWidth="66.0" progress="0.0" visible="false" />
-      <ImageView id="imgOrg" fx:id="imgOrg" fitHeight="440.0" fitWidth="580.0" layoutX="100.0" layoutY="160.0" mouseTransparent="true" pickOnBounds="true" preserveRatio="true" />
+      <ImageView id="imgOrg" fx:id="imgOrg" fitHeight="400.0" fitWidth="500.0" layoutX="100.0" layoutY="160.0" mouseTransparent="true" pickOnBounds="true" preserveRatio="true">
+         <viewport>
+            <Rectangle2D />
+         </viewport></ImageView>
       <MenuBar id="menuBar" fx:id="menuBar" layoutX="192.0" layoutY="21.0" prefHeight="32.0" prefWidth="242.0">
         <menus>
           <Menu fx:id="homeMenu" mnemonicParsing="false" text="Acasa">
@@ -52,21 +58,25 @@
                </items></Menu>
         </menus>
       </MenuBar>
-      <ImageView id="img" fx:id="img" fitHeight="440.0" fitWidth="580.0" layoutX="100.0" layoutY="160.0" pickOnBounds="true" preserveRatio="true" visible="false" />
+      <ImageView id="img" fx:id="img" fitHeight="400.0" fitWidth="500.0" layoutX="100.0" layoutY="160.0" pickOnBounds="true" preserveRatio="true" visible="false" />
       <Pane id="helpPane" fx:id="helpPane" layoutX="50.0" layoutY="70.0" prefHeight="600.0" prefWidth="1100.0" visible="false">
          <children>
-            <TextArea id="helpText" fx:id="helpText" layoutX="29.0" layoutY="20.0" prefHeight="581.0" prefWidth="1009.0" text="Aceasta aceasta aplicatie ">
+            <TextArea id="helpText" fx:id="helpText" editable="false" layoutX="29.0" layoutY="20.0" prefHeight="581.0" prefWidth="1009.0" text="&#10;&#10;&#10;&#10;Prewitt Editor v7.1.0&#10;&#10;Autor: Rosana Constantin&#10;Proiect:  https://github.com/RosanaConstantin/imageProcessing&#10;&#10;&#10;Acest program este software liber; îl puteți redistribui și / sau modifica în conformitate cu termenii Licenței Publice Generale GNU, publicată de Fundația pentru Software Liber; fie versiunea 2 a Licenței, fie (la alegere) orice versiune ulterioară.&#10;&#10;Acest program este distribuit în speranța că va fi util, dar FĂRĂ NICI O GARANȚIE; fără nici măcar garanția implicită de VANDABILITATE sau de UTILIZAREA PENTRU UN SCOP SPECIC. Pentru mai multe detalii, consultați Licența publică generală GNU." wrapText="true">
                <font>
-                  <Font name="Arial Italic" size="16.0" />
+                  <Font name="Arial Narrow Italic" size="17.0" />
                </font></TextArea>
+            <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="400.0" layoutY="350.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../img/collider_1x.png" />
+               </image>
+            </ImageView>
          </children></Pane>
       <ToggleButton id="toggle" fx:id="toggle" layoutX="285.0" layoutY="632.0" mnemonicParsing="false" onAction="#changePhoto" prefHeight="31.0" prefWidth="260.0" text="Afisare imagine procesata" />
       <Label id="imgOrgLabel" fx:id="imgOrgLabel" layoutX="121.0" layoutY="635.0" prefHeight="21.0" prefWidth="142.0" text="Imaginea originala" />
       <Label id="imgLabel" fx:id="imgLabel" layoutX="78.0" layoutY="637.0" text="Imaginea transformata" visible="false" />
       <TextField id="info" fx:id="info" layoutX="808.0" layoutY="467.0" prefHeight="27.0" prefWidth="172.0" text="Informatii imagine" visible="false" />
-      <Hyperlink id="gitLink" fx:id="gitLink" layoutX="540.0" layoutY="680.0" onMouseClicked="#openWebpage" prefHeight="25.0" prefWidth="363.0" text="https://github.com/RosanaConstantin/imageProcessing" />
+      <Hyperlink id="gitLink" fx:id="gitLink" layoutX="540.0" layoutY="680.0" onMouseClicked="#openWebpage" prefHeight="29.0" prefWidth="430.0" text="https://github.com/RosanaConstantin/imageProcessing" />
       <Label id="textGit" layoutX="291.0" layoutY="684.0" text="Gaseste proiectul pe Git, la adresa:" />
-      <ChoiceBox fx:id="chooseBox" layoutX="896.0" layoutY="99.0" onKeyPressed="#getOrientation" prefHeight="27.0" prefWidth="172.0" />
       <Label layoutX="677.0" layoutY="101.0" prefHeight="27.0" prefWidth="188.0" text="Alege tipul de transformare:" />
       <RadioButton fx:id="radioInfo" layoutX="737.0" layoutY="395.0" mnemonicParsing="false" onAction="#showInfo" prefHeight="17.0" prefWidth="291.0" text="      Afiseaza informatiile despre imagine" />
       <TableView id="table" fx:id="tableModif" fixedCellSize="30.0" layoutX="677.0" layoutY="515.0" prefHeight="151.0" prefWidth="430.0" visible="false">
@@ -81,11 +91,12 @@
       </TableView>
       <Pane id="helpPane" fx:id="homePane" layoutX="60.0" layoutY="80.0" prefHeight="600.0" prefWidth="1100.0" visible="false">
          <children>
-            <TextArea id="helpText" fx:id="helpText1" layoutX="29.0" layoutY="20.0" prefHeight="581.0" prefWidth="1009.0" text="The Prewitt operator is used in image processing, particularly within edge detection algorithms. Technically, it is a discrete differentiation operator, computing an approximation of the gradient of the image intensity function. At each point in the image, the result of the Prewitt operator is either the corresponding gradient vector or the norm of this vector. The Prewitt operator is based on convolving the image with a small, separable, and integer valued filter in horizontal and vertical directions and is therefore relatively inexpensive in terms of computations like Sobel and Kayyali operators. On the other hand, the gradient approximation which it produces is relatively crude, in particular for high frequency variations in the image. The Prewitt operator was developed by Judith M. S. Prewitt.In simple terms, the operator calculates the gradient of the image intensity at each point, giving the direction of the largest possible increase from light to dark and the rate of change in that direction. The result therefore shows how &quot;abruptly&quot; or &quot;smoothly&quot; the image changes at that point, and therefore how likely it is that part of the image represents an edge, as well as how that edge is likely to be oriented. In practice, the magnitude (likelihood of an edge) calculation is more reliable and easier to interpret than the direction calculation.Mathematically, the gradient of a two-variable function (here the image intensity function) is at each image point a 2D vector with the components given by the derivatives in the horizontal and vertical directions. At each image point, the gradient vector points in the direction of largest possible intensity increase, and the length of the gradient vector corresponds to the rate of change in that direction. This implies that the result of the Prewitt operator at an image point which is in a region of constant image intensity is a zero vector and at a point on an edge is a vector which points across the edge, from darker to brighter values.">
+            <TextArea id="helpText" fx:id="homeText" editable="false" layoutX="20.0" layoutY="20.0" prefHeight="581.0" prefWidth="1018.0" text="&#10;&#10;Operatorul Prewitt este utilizat în procesarea imaginilor, în special în cadrul algoritmilor de detectare a marginilor. Din punct de vedere tehnic, este un operator de diferențiere discret, calculând o aproximare a gradientului funcției de intensitate a imaginii.&#10; În fiecare punct al imaginii, rezultatul operatorului Prewitt este fie vectorul gradient corespunzător, fie norma acestui vector. Operatorul Prewitt se bazează pe conveierea imaginii cu un filtru mic, separabil și cu valoare integrată în direcții orizontale și verticale și este, prin urmare, relativ ieftin în ceea ce privește calculele precum operatorii Sobel și Kayyali. Pe de altă parte, aproximarea gradientului pe care o produce este relativ brută, în special pentru variațiile de înaltă frecvență din imagine. &#10;&#10;Operatorul Prewitt a fost dezvoltat de Judith M. S. Prewitt. În termeni simpli, operatorul calculează gradientul intensității imaginii în fiecare punct, dând direcția celei mai mari creșteri posibile din lumină spre întuneric și rata de schimbare în acea direcție. Rezultatul, prin urmare, arată modul în care imaginea &quot;brusc&quot; sau &quot;fără probleme&quot; se schimbă la acel moment și, prin urmare, cât de probabil este ca o parte a imaginii să reprezinte o margine, precum și modul în care marginea respectivă este probabil orientată.&#10;&#10; În practică, calculul amplitudinii (probabilitatea unei margini) este mai fiabil și mai ușor de interpretat decât calculul direcției. În mod punctual, gradientul unei funcții cu două variabile (aici funcția de intensitate a imaginii) este la fiecare punct de imagine un vector 2D cu componentele date de derivați în direcțiile orizontale și verticale. La fiecare punct de imagine, vectorul de gradient indică în direcția celei mai mari creșteri a intensității posibile, iar lungimea vectorului de gradient corespunde ratei de schimbare în direcția respectivă. Aceasta implică faptul că rezultatul operatorului Prewitt la un punct de imagine care se află într-o regiune cu intensitate constantă a imaginii este un vector zero și la un punct pe o margine este un vector care indică peste margine, de la valori mai întunecate la cele mai strălucitoare." wrapText="true">
                <font>
                   <Font name="Arial Italic" size="16.0" />
                </font>
             </TextArea>
+            <Hyperlink layoutX="334.0" layoutY="500.0" prefHeight="29.0" prefWidth="430.0" text="https://en.wikipedia.org/wiki/Prewitt_operator" textAlignment="CENTER" wrapText="true" />
          </children>
       </Pane>
    </children>

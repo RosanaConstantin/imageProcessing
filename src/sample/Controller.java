@@ -96,7 +96,7 @@ public class Controller {
     @FXML
     Hyperlink gitLink;
     @FXML
-    ChoiceBox chooseBox;
+    ComboBox chooseBox;
 
     private String originalPath;
     private String imageName;
@@ -104,8 +104,7 @@ public class Controller {
 
     public void initialize(){
         this.dateHolder.setValue(LocalDate.now());
-        this.homePane.toFront();
-        this.parentPane.toBack();
+        this.homePane.setVisible(true);
     }
 
     public void  homeInitialize(){
@@ -147,7 +146,10 @@ public class Controller {
         this.imageName = selectedImage.getName();
         try {
             this.imgOrg.setImage(new Image( new FileInputStream(this.originalPath)));
-            this.chooseBox.getItems().addAll("Vertical", "Horizontal", "Hor&Vert");
+            this.chooseBox.setPromptText("Orientare");
+            if(this.chooseBox.getItems().isEmpty()) {
+                this.chooseBox.getItems().addAll("Vertical", "Horizontal", "Hor&Vert");
+            }
             this.progressInd.setVisible(true);
             this.progressInd.setProgress(Double.valueOf(0));
             getImageDetails(this.imgOrg.getImage(), this.originalPath, true);
@@ -246,7 +248,7 @@ public class Controller {
             this.img.setImage(resultImage);
             this.progressInd.setProgress(Double.valueOf(100));
         }
-        saveToFile();
+        // saveToFile();
         return;
     }
 
