@@ -248,7 +248,7 @@ public class Controller {
             this.img.setImage(resultImage);
             this.progressInd.setProgress(Double.valueOf(100));
         }
-        // saveToFile();
+        saveToFile();
         return;
     }
 
