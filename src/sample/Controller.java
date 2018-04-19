@@ -106,6 +106,7 @@ public class Controller {
     private String originalPath;
     private String imageName;
     private String path;
+    private long startTime;
 
     public void initialize(){
         this.dateHolder.setValue(LocalDate.now());
@@ -246,7 +247,7 @@ public class Controller {
 
     public void processImage() {
         String orientation = getOrientation();
-
+        this.startTime = System.nanoTime();
         if(orientation.equals("vertical")){
             Image resultImage = PrewittVertical.PrewittVertical(this.imgOrg.getImage(), this.progressInd);
             this.img.setImage(resultImage);
@@ -260,6 +261,9 @@ public class Controller {
             this.img.setImage(resultImage);
             this.progressInd.setProgress(Double.valueOf(100));
         }
+
+        long elapsed = (System.nanoTime() - startTime); //timpul in nanosecunde
+        System.out.println(elapsed);
         saveToFile();
         return;
     }
