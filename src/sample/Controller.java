@@ -162,6 +162,7 @@ public class Controller {
                 this.chooseBox.getItems().addAll("Vertical", "Horizontal", "Hor&Vert");
             }
             this.progressInd.setVisible(true);
+            this.processButton.setVisible(true);
             this.progressInd.setProgress(Double.valueOf(0));
             getImageDetails(this.imgOrg.getImage(), this.originalPath, true);
         } catch (Exception ex) {
