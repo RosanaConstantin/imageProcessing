@@ -16,12 +16,11 @@
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.ToggleButton?>
-<?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<Pane id="window" fx:id="parentPane" prefHeight="740.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/8.0.112" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller">
+<Pane id="window" fx:id="parentPane" prefHeight="740.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller">
    <children>
       <ComboBox fx:id="chooseBox" layoutX="921.0" layoutY="99.0" prefWidth="150.0" visibleRowCount="3" />
       <Button id="loadButton" layoutX="233.0" layoutY="99.0" mnemonicParsing="false" onAction="#loadImage" prefHeight="27.0" prefWidth="172.0" text="Incarca imaginea" />
@@ -65,11 +64,7 @@
                <font>
                   <Font name="Arial Narrow Italic" size="17.0" />
                </font></TextArea>
-            <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="400.0" layoutY="350.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../img/collider_1x.png" />
-               </image>
-            </ImageView>
+            <ImageView fx:id="helpIcon" fitHeight="150.0" fitWidth="200.0" layoutX="400.0" layoutY="350.0" pickOnBounds="true" preserveRatio="true" />
          </children></Pane>
       <ToggleButton id="toggle" fx:id="toggle" layoutX="285.0" layoutY="632.0" mnemonicParsing="false" onAction="#changePhoto" prefHeight="31.0" prefWidth="260.0" text="Afisare imagine procesata" />
       <Label id="imgOrgLabel" fx:id="imgOrgLabel" layoutX="121.0" layoutY="635.0" prefHeight="21.0" prefWidth="142.0" text="Imaginea originala" />
@@ -96,7 +91,9 @@
                   <Font name="Arial Italic" size="16.0" />
                </font>
             </TextArea>
-            <Hyperlink layoutX="334.0" layoutY="500.0" prefHeight="29.0" prefWidth="430.0" text="https://en.wikipedia.org/wiki/Prewitt_operator" textAlignment="CENTER" wrapText="true" />
+            <Hyperlink layoutX="372.0" layoutY="500.0" prefHeight="29.0" prefWidth="430.0" text="https://en.wikipedia.org/wiki/Prewitt_operator" textAlignment="CENTER" wrapText="true" />
+            <ImageView fx:id="homeIcon" fitHeight="105.0" fitWidth="172.0" layoutX="100.0" layoutY="460.0" pickOnBounds="true" preserveRatio="true" />
+            <Label layoutX="260.0" layoutY="505.0" text="Vezi mai multe:" />
          </children>
       </Pane>
    </children>

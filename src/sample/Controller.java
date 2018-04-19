@@ -29,6 +29,7 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URI;
 import java.text.DecimalFormat;
@@ -97,6 +98,10 @@ public class Controller {
     Hyperlink gitLink;
     @FXML
     ComboBox chooseBox;
+    @FXML
+    ImageView helpIcon;
+    @FXML
+    ImageView homeIcon;
 
     private String originalPath;
     private String imageName;
@@ -105,6 +110,12 @@ public class Controller {
     public void initialize(){
         this.dateHolder.setValue(LocalDate.now());
         this.homePane.setVisible(true);
+        try {
+            this.helpIcon.setImage(new Image( new FileInputStream("src/utils/images/matrix.png")));
+            this.homeIcon.setImage(new Image( new FileInputStream("src/utils/images/seeMore.png")));
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
     }
 
     public void  homeInitialize(){
