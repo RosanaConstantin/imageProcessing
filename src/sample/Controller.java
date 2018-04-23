@@ -73,7 +73,7 @@ public class Controller {
     @FXML
     MenuBar menuBar;
     @FXML
-    RadioButton radioInfo;
+    CheckBox checkInfo;
     @FXML
     MenuItem helpItem;
     @FXML
@@ -275,7 +275,7 @@ public class Controller {
             this.img.setVisible(true);
             this.imgLabel.setVisible(true);
 
-            if(this.radioInfo.isSelected()){
+            if(this.checkInfo.isSelected()){
                 this.tableModif.setVisible(true);
                 this.table.setVisible(false);
             } else {
@@ -288,7 +288,7 @@ public class Controller {
             this.img.setVisible(false);
             this.imgLabel.setVisible(false);
 
-            if(this.radioInfo.isSelected()){
+            if(this.checkInfo.isSelected()){
                 this.tableModif.setVisible(false);
                 this.table.setVisible(true);
             } else {
@@ -299,7 +299,7 @@ public class Controller {
     }
 
     public void showInfo() {
-        boolean  value = this.radioInfo.isSelected();
+        boolean  value = this.checkInfo.isSelected();
         if(value){
             this.info.setVisible(true);
             if(this.toggle.selectedProperty().getValue()) {
