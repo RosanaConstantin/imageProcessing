@@ -73,7 +73,7 @@ public class Controller {
     @FXML
     MenuBar menuBar;
     @FXML
-    RadioButton radioInfo;
+    CheckBox radioInfo;
     @FXML
     MenuItem helpItem;
     @FXML
@@ -165,6 +165,7 @@ public class Controller {
             this.progressInd.setVisible(true);
             this.processButton.setVisible(true);
             this.progressInd.setProgress(Double.valueOf(0));
+            this.radioInfo.setVisible(true);
             getImageDetails(this.imgOrg.getImage(), this.originalPath, true);
         } catch (Exception ex) {
             ex.printStackTrace();
