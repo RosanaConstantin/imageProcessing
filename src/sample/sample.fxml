@@ -20,7 +20,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<Pane id="window" fx:id="parentPane" prefHeight="740.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/8.0.112" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller">
+<Pane id="window" fx:id="parentPane" prefHeight="740.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller">
    <children>
       <ComboBox fx:id="chooseBox" layoutX="921.0" layoutY="99.0" prefWidth="150.0" visibleRowCount="3" />
       <Button id="loadButton" layoutX="233.0" layoutY="99.0" mnemonicParsing="false" onAction="#loadImage" prefHeight="27.0" prefWidth="172.0" text="Incarca imaginea" />
@@ -95,6 +95,6 @@
             <Label layoutX="260.0" layoutY="505.0" text="Vezi mai multe:" />
          </children>
       </Pane>
-      <CheckBox fx:id="radioInfo" layoutX="748.0" layoutY="370.0" mnemonicParsing="false" onAction="#showInfo" text="      Afiseaza informatiile despre imagine" visible="false" />
+      <CheckBox fx:id="checkInfo" layoutX="737.0" layoutY="371.0" mnemonicParsing="false" onAction="#showInfo" text="      Afiseaza informatiile despre imagine" />
    </children>
 </Pane>
