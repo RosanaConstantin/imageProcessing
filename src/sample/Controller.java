@@ -165,6 +165,7 @@ public class Controller {
             this.progressInd.setVisible(true);
             this.processButton.setVisible(true);
             this.progressInd.setProgress(Double.valueOf(0));
+            this.checkInfo.setVisible(true);
             getImageDetails(this.imgOrg.getImage(), this.originalPath, true);
         } catch (Exception ex) {
             ex.printStackTrace();
